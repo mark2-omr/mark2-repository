@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%= display_meta_tags default_meta_tags %>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "application", "sidebar", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+  </head>
+
+  <body>
+    <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+      <%= link_to root_path, class: "navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-4" do %>
+        <i class="bi bi-database-fill"></i> Mark2 Repository
+      <% end %>
+      <% if user_signed_in? %>
+        <div class="dropdown">
+          <a data-bs-toggle="dropdown" aria-expanded="false">
+            <% if current_user.image %>
+              <%= image_tag current_user.image, class: "rounded-circle",
+                style: "width: 36px; height: 36px; margin-right: 12px;" %>
+            <% else %>
+              <%= image_tag "user.png", class: "rounded-circle",
+                style: "width: 36px; height: 36px; margin-right: 12px;" %>
+            <% end %>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" style="margin: 0 8px;" aria-labelledby="dropdownMenuButton1">
+            <li>
+              <%= link_to root_path, class: "dropdown-item" do %>
+                <i class="bi bi-house-door"></i> Home
+              <% end %>
+            </li>
+            <li>
+              <%= link_to surveys_path, class: "dropdown-item" do %>
+                <i class="bi bi-clipboard"></i> Surveys
+              <% end %>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+              <%= link_to sign_out_path,
+                data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' },
+                class: "dropdown-item" do %>
+                <i class="bi bi-arrow-bar-right"></i> Sign out
+              <% end %>
+            </li>
+          </ul>
+        </div>
+      <% else %>
+        <div class="navbar-nav">
+          <div class="nav-item text-nowrap">
+            <%= form_tag("/auth/google_oauth2", name: "sign_in", method: :post, data: { turbo: false }) do %>
+              <a href="#" onclick="document.sign_in.submit();" class="nav-link px-3">Sign in</a>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </header>
+
+    <div class="container-fluid">
+      <div class="row">
+        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+          <div class="position-sticky pt-3 sidebar-sticky">
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <% if params[:controller] == "welcome" %>
+                  <%= link_to root_path, class: "nav-link active" do %>
+                    <i class="bi bi-house-door-fill"></i> Home
+                  <% end %>
+                <% else %>
+                  <%= link_to root_path, class: "nav-link" do %>
+                    <i class="bi bi-house-door"></i> Home
+                  <% end %>
+                <% end %>
+              </li>
+              <% if user_signed_in? %>
+                <li class="nav-item">
+                  <% if params[:controller] == "surveys" %>
+                    <%= link_to surveys_path, class: "nav-link active" do %>
+                      <i class="bi bi-clipboard-fill"></i> Surveys
+                    <% end %>
+                  <% else %>
+                    <%= link_to surveys_path, class: "nav-link" do %>
+                      <i class="bi bi-clipboard"></i> Surveys
+                    <% end %>
+                  <% end %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </nav>
+
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+          <% if flash[:notice] %>
+            <div class="alert alert-success alert-dismissible fade show mt-3 mb-0" role="alert">
+              <%= flash[:notice] %>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          <% elsif flash[:alert] %>
+            <div class="alert alert-danger alert-dismissible fade show mt-3 mb-0" role="alert">
+              <%= flash[:alert] %>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          <% end %>
+          <%= yield %>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>
