@@ -77,7 +77,9 @@ group :test do
 end
 
 gem "kaminari"
+gem "matrix"
 gem "meta-tags"
 gem "omniauth-google-oauth2"
 gem "omniauth-rails_csrf_protection"
+gem "rack-cors"
 gem "roo"

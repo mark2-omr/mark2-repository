@@ -32,7 +32,7 @@ class SurveysController < ApplicationController
   def create
     @survey = Survey.new(survey_params)
     @survey.user_id = current_user.id
-    @survey.file = @survey.file.read
+    @survey.file = params[:survey][:file].read
     @survey.parse_file(params[:survey][:file].tempfile.to_path.to_s)
 
     respond_to do |format|
@@ -55,6 +55,12 @@ class SurveysController < ApplicationController
   def update
     respond_to do |format|
       if @survey.update(survey_params)
+        if params[:survey][:file]
+          @survey.file = params[:survey][:file].read
+          @survey.parse_file(params[:survey][:file].tempfile.to_path.to_s)
+          @survey.save
+        end
+
         format.html do
           redirect_to survey_url(@survey),
                       notice: "Survey was successfully updated."
@@ -91,7 +97,7 @@ class SurveysController < ApplicationController
 
   def api
     @survey = Survey.find_by(slug: params[:slug])
-    render json: @survey.payload
+    render json: { name: @survey.name, payloads: @survey.payloads }
   end
 
   private
