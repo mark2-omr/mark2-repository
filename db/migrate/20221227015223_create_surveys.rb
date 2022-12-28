@@ -4,7 +4,7 @@ class CreateSurveys < ActiveRecord::Migration[7.0]
       t.integer :user_id
       t.string :name
       t.string :slug
-      t.json :payload
+      t.json :payloads
       t.binary :file
 
       t.timestamps

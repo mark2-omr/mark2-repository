@@ -186,6 +186,8 @@ GEM
       nio4r (~> 2.0)
     racc (1.6.2)
     rack (2.2.5)
+    rack-cors (1.1.1)
+      rack (>= 2.0.0)
     rack-protection (3.0.5)
       rack
     rack-test (2.0.2)
@@ -293,12 +295,14 @@ DEPENDENCIES
   jbuilder
   jsbundling-rails
   kaminari
+  matrix
   meta-tags
   omniauth-google-oauth2
   omniauth-rails_csrf_protection
   pg (~> 1.1)
   prettier
   puma (~> 5.0)
+  rack-cors
   rails (~> 7.0.4)
   redis (~> 4.0)
   roo
