@@ -1,11 +1,24 @@
-<div id="<%= dom_id survey %>">
-  <p>
-    <strong>Name:</strong>
+<div id="<%= dom_id survey %>" class="card">
+  <div class="card-header">
     <%= survey.name %>
-  </p>
+  </div>
+  <div class="card-body">
+    <table class="table table-bordered" style="table-layout: fixed;">
+      <tr>
+        <th>Name</th>
+        <td><%= survey.name %></td>
+      </tr>
+      <tr>
+        <th>Slug</th>
+        <td><%= survey.slug %></td>
+      </tr>
+    </table>
 
-  <p>
-    <strong>Slug:</strong>
-    <%= survey.slug %>
-  </p>
+    <%= link_to download_file_survey_path(@survey), class: "btn btn-primary" do %>
+      <i class="bi bi-download"></i> Excel
+    <% end %>
+    <%= link_to download_payload_survey_path(@survey), class: "btn btn-primary" do %>
+      <i class="bi bi-download"></i> JSON
+    <% end %>
+  </div>
 </div>
