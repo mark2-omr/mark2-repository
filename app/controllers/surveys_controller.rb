@@ -92,7 +92,7 @@ class SurveysController < ApplicationController
   end
 
   def download_payload
-    send_data(@survey.payload, filename: "#{@survey.id}.json")
+    send_data(@survey.payloads, filename: "#{@survey.id}.json")
   end
 
   def api
