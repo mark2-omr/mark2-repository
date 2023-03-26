@@ -1,13 +1,5 @@
 class SurveysController < ApplicationController
-  before_action :set_survey,
-                only: %i[
-                  show
-                  edit
-                  update
-                  destroy
-                  download_file
-                  download_payload
-                ]
+  before_action :set_survey, only: %i[show edit update destroy download_file download_payload]
   before_action :authenticate_user!, except: :api
 
   # GET /surveys or /surveys.json
