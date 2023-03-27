@@ -36,5 +36,6 @@
 /node_modules
 
 deploy.sh
+cockroachdb-mark2-repository.crt
 
 .DS_Store
