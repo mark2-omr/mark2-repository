@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.2.1"
+ruby "3.2.2"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.4", ">= 7.0.4.3"
@@ -11,6 +11,9 @@ gem "sprockets-rails"
 
 # Use postgresql as the database for Active Record
 # gem "pg", "~> 1.1"
+
+gem 'activerecord-cockroachdb-adapter', '~> 7.0.0'
+gem 'pg', '~> 1.4.0'
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
@@ -71,7 +74,6 @@ group :test do
   gem "webdrivers"
 end
 
-gem 'activerecord-cockroachdb-adapter', '~> 7.0.0'
 gem "kaminari"
 gem "matrix"
 gem "meta-tags"
