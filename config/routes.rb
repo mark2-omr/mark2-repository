@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   resources :surveys do
     member do
-      get :download_file
       get :download_payload
     end
   end
@@ -15,5 +14,5 @@ Rails.application.routes.draw do
   delete "/sign_out", to: "sessions#destroy"
 
   # Defines the root path route ("/")
-  root "welcome#index"
+  root 'welcome#index'
 end

@@ -14,7 +14,7 @@
       </tr>
     </table>
 
-    <%= link_to download_file_survey_path(@survey), class: "btn btn-primary" do %>
+    <%= link_to rails_blob_path(@survey.file, disposition: 'attachment'), class: 'btn btn-primary' do %>
       <i class="bi bi-download"></i> Excel
     <% end %>
     <%= link_to download_payload_survey_path(@survey), class: "btn btn-primary" do %>
