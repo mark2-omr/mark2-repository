@@ -24,7 +24,6 @@ class SurveysController < ApplicationController
   def create
     @survey = Survey.new(survey_params)
     @survey.user_id = current_user.id
-    @survey.file = params[:survey][:file].read
     @survey.parse_file(params[:survey][:file].tempfile.to_path.to_s)
 
     respond_to do |format|

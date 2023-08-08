@@ -36,6 +36,5 @@
 /node_modules
 
 fly.toml
-cockroachdb-mark2-repository.crt
 
 .DS_Store

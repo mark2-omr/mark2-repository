@@ -1,5 +1,6 @@
 class Survey < ApplicationRecord
   belongs_to :user
+  has_one_attached :file
 
   def parse_file(path)
     payloads = Array.new
